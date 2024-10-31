@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  app:
+    build: .
+    environment:
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+
+
+  db:
+    image:
+    restart: always
+    environment:
+    volumes:
+    healthcheck:
+    ports:
+    networks:
+
+
+volumes:
+
+networks:
