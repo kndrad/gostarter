@@ -2,11 +2,6 @@
 fmt:
 	./scripts/format.sh
 
-.PHONY: review
-review:
-	./scripts/format.sh
-	./scripts/check.sh
-
 .PHONY: cover
 cover:
 	go test ./... -count=1 -failfast -coverprofile=coverage.out
@@ -24,8 +19,8 @@ build:
 tests:
 	go test ./... -count=1 -failfast
 
-.PHONY: staging
-staging:
+.PHONY: review
+review:
 	./scripts/format.sh
 	./scripts/check.sh
 	go test ./... -count=1 -failfast -coverprofile=coverage.out
