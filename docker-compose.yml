@@ -2,6 +2,11 @@ services:
   app:
     build: .
     environment:
+      DB_HOST:
+      DB_USER:
+      DB_PASSWORD:
+      DB_NAME:
+      DB_PORT:
     depends_on:
       db:
         condition: service_healthy
@@ -13,7 +18,13 @@ services:
     restart: always
     environment:
     volumes:
+      - ./db/init:/docker-entrypoing-initdb.d
     healthcheck:
+      test: []
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 1s
     ports:
     networks:
 
