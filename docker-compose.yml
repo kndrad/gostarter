@@ -18,7 +18,7 @@ services:
     restart: always
     environment:
     volumes:
-      - ./db/init:/docker-entrypoint-initdb.d
+      - db_data:/var/lib/unknown_sql/data
     healthcheck:
       test: []
       interval: 5s
@@ -29,6 +29,21 @@ services:
     networks:
 
 
+  migrate:
+    image: migrate:migrate
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./db/migrations:/db/migrations
+    environment:
+    command: [ "-path", "/db/migrations", "-database", "", "up" ]
+    networks:
+      bittersweet:
+
+
 volumes:
+  db_data:
+
 
 networks:

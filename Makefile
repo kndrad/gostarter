@@ -36,3 +36,21 @@ docker-up:
 .PHONY: docker-down
 docker-down:
 	docker-compose down
+
+.PHONY: docker-rmv
+docker-rmv:
+	docker-compose down -v
+
+POSTGRES_URL = ""
+
+.PHONY: migrate-up
+migrate-up:
+	migrate -database $(POSTGRES_URL) -path db/migrations up
+
+.PHONY: migrate-down
+migrate-down:
+	migrate -database $(POSTGRES_URL) -path db/migrations down
+
+.PHONY: migrate-version
+migrate-version:
+	migrate -database $(POSTGRES_URL) -path db/migrations version

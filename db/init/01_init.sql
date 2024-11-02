@@ -1,3 +1,0 @@
-CREATE TABLE (
-    id BIGSERIAL PRIMARY KEY,
-    );
