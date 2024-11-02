@@ -1,6 +1,8 @@
 services:
   app:
     build: .
+    env_file:
+      - .env
     environment:
       DB_HOST:
       DB_USER:
@@ -37,7 +39,7 @@ services:
     volumes:
       - ./db/migrations:/db/migrations
     environment:
-    command: [ "-path", "/db/migrations", "-database", "", "up" ]
+    command: [ "-path", "/db/migrations", "-database", "driver://${DB_USER}:${DB_PASSWORD}@db:${DB_PORT}/${DB_NAME}?sslmode=disable", "up" ]
     networks:
       bittersweet:
 
